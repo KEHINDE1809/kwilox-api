@@ -3,11 +3,13 @@ const mongoose = require('mongoose');
 const DrinkSchema = new mongoose.Schema({
   name: {
     type: String,
-    
+    required: true,
+    trim: true
   },
   manufacturer: {
     type: String,
-    
+    required: true,
+    trim: true
   },
   expiryDate: {
     type: Date,
@@ -16,9 +18,16 @@ const DrinkSchema = new mongoose.Schema({
   quantity: {
     type: Number,
     required: true,
-    
+    default: 0,
+    min: [0, 'Quantity cannot be negative']
   }
 }, { timestamps: true });
 
+DrinkSchema.virtual('isExpired').get(function () {
+  return new Date() > this.expiryDate;
+});
+
+DrinkSchema.set('toJSON', { virtuals: true });
+DrinkSchema.set('toObject', { virtuals: true });
 
 module.exports = mongoose.model('Drink', DrinkSchema);
