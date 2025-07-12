@@ -20,3 +20,5 @@ A RESTful API for managing drink inventory at Kwilox relaxation center.
 git clone https://github.com/yourusername/kwilox-api.git
 cd kwilox-api
 npm install
+
+this is my documentation on postman https://documenter.getpostman.com/view/46530790/2sB34cphtY
